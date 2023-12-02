@@ -3,6 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import path from "path";
+import cookieParser from "cookie-parser";
 
 const app = express();
 process.env.NODE_ENV !== "production" && app.use(morgan("dev"));
@@ -13,6 +14,7 @@ dotenv.config({
 });
 
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 
 app.all("*", (req, res) =>

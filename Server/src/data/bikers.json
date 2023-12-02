@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Biker 1",
+    "email": "biker1@example.com",
+    "password": "biker1@password"
+  },
+  {
+    "name": "Biker 2",
+    "email": "biker2@example.com",
+    "password": "biker2@password"
+  },
+  {
+    "name": "Biker 3",
+    "email": "biker3@example.com",
+    "password": "biker3@password"
+  },
+  {
+    "name": "Biker 4",
+    "email": "biker4@example.com",
+    "password": "biker4@password"
+  },
+  {
+    "name": "Biker 5",
+    "email": "biker5@example.com",
+    "password": "biker5@password"
+  },
+  {
+    "name": "Biker 6",
+    "email": "biker6@example.com",
+    "password": "biker6@password"
+  },
+  {
+    "name": "Biker 7",
+    "email": "biker7@example.com",
+    "password": "biker7@password"
+  },
+  {
+    "name": "Biker 8",
+    "email": "biker8@example.com",
+    "password": "biker8@password"
+  },
+  {
+    "name": "Biker 9",
+    "email": "biker9@example.com",
+    "password": "biker9@password"
+  },
+  {
+    "name": "Biker 10",
+    "email": "biker10@example.com",
+    "password": "biker10@password"
+  }
+]
