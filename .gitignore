@@ -1,0 +1,7 @@
+# Dependencies
+node_modules
+
+# logs
+yarn-error.log
+# ENV files
+*.env
