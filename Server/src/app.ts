@@ -7,6 +7,7 @@ import path from "path";
 const app = express();
 process.env.NODE_ENV !== "production" && app.use(morgan("dev"));
 
+console.log(`/config/${process.env.NODE_ENV}.env`);
 dotenv.config({
   path: path.resolve(__dirname + `/config/${process.env.NODE_ENV}.env`),
 });
