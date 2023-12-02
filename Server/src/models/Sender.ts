@@ -1,8 +1,9 @@
 import { Schema } from "mongoose";
 import { UserI } from "./common/User";
 import User from "./common/User";
+import { HasRole } from "../config/constants";
 
-export interface SenderI extends UserI {
+export interface SenderI extends UserI, HasRole {
   // Additional fields specific to Sender
 }
 

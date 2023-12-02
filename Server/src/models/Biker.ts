@@ -1,10 +1,9 @@
 import { Schema, model } from "mongoose";
 import { UserI } from "./common/User";
 import User from "./common/User";
+import { HasRole, Roles } from "../config/constants";
 
-export interface BikerI extends UserI {
-  // Additional fields specific to Biker
-}
+export interface BikerI extends UserI, HasRole {}
 
 const BikerSchema = new Schema<BikerI>({
   // Additional fields specific to Biker
