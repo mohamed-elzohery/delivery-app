@@ -14,17 +14,22 @@
   "scripts": {
     "build": "npx tsc",
     "start": "NODE_ENV=prod node dist/server.js",
-    "dev": "nodemon src/server.ts",
+    "dev": "npm run reset && nodemon src/server.ts",
+    "seed": "ts-node src/seeder/seeder.ts i",
+    "reset": "ts-node src/seeder/seeder.ts d && ts-node src/seeder/seeder.ts i",
     "test": "jest"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/jest": "^28.1.8",
+    "@types/jsonwebtoken": "^9.0.5",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.3",
     "@types/node": "^18.7.13",
     "@types/supertest": "^2.0.12",
+    "colors": "^1.4.0",
     "jest": "^29.0.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.19",
