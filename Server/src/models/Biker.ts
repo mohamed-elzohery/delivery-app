@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 import { UserI } from "./common/User";
 import User from "./common/User";
+import bcrypt from "bcryptjs";
 import { HasRole, Roles } from "../config/constants";
 
 export interface BikerI extends UserI, HasRole {}

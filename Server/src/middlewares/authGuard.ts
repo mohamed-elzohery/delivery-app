@@ -51,4 +51,4 @@ const authorize =
     next(new ErrorResponse(401, "Unauthorized access"));
   };
 
-export default authGuard;
+export default { authGuard, authorize };

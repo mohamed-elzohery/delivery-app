@@ -11,7 +11,11 @@ import SenderModel from "../models/Sender";
 
 // Pushing data to db
 const pushJsonData = async (data: any[], collection: any) => {
-  await collection.insertMany(data);
+  for (const doc of data) {
+    const newEntry = new collection(doc);
+    console.log(newEntry);
+    await newEntry.save().catch(console.log);
+  }
 };
 
 // Delete all hard-coded data
