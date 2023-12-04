@@ -6,6 +6,7 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import AuthRouter from "./routes/v1/auth";
 import ErrorHandler from "./middlewares/errorHandler";
+import ParcelsRouter from "./routes/v1/parcels";
 
 const app = express();
 process.env.NODE_ENV !== "production" && app.use(morgan("dev"));
@@ -19,6 +20,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use("/api/v1/auth", AuthRouter);
+app.use("/api/v1/parcels", ParcelsRouter);
 
 app.all("*", (req, res) =>
   res.status(404).json({ message: "Undefinded Routes" })

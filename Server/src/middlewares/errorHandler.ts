@@ -9,7 +9,6 @@ const ErrorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(err);
   // Check if error is explicitly thrown by the developer
   if (err instanceof ErrorResponse) {
     res.status(err.statusCode).json(err.message);
@@ -23,7 +22,8 @@ const ErrorHandler = (
   };
 
   if (err.name && err.name === "CastError") {
-    error = new NotFound(`${err.params.id} is not found`);
+    error = new NotFound(`id is not found`);
+    console.log("first error", error);
     error.name = "id";
   }
 

@@ -1,9 +1,10 @@
-import { Schema, model } from "mongoose";
+import { ObjectId, Schema, model } from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export interface UserI {
   name: string;
+  _id: ObjectId;
   email: string;
   password: string;
   isPasswordMatched: (password: string) => Promise<boolean>;

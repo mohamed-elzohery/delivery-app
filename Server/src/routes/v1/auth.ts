@@ -6,6 +6,6 @@ import Sender from "../../models/Sender";
 const AuthRouter = Router();
 
 AuthRouter.post("/bikers/login", login(Biker));
-AuthRouter.post("/login", login(Sender));
+AuthRouter.post("/senders/login", login(Sender));
 
 export default AuthRouter;

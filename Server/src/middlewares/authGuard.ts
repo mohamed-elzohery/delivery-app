@@ -1,5 +1,5 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { Request } from "express";
+import { Request, Response } from "express";
 import asyncHandler from "./asyncHandler";
 import USER from "../models/common/User";
 import Unauthorized from "../utils/errors/Unauthorized";
@@ -16,39 +16,35 @@ export interface AuthenticatedRequest extends Request {
   user: UserI & HasRole;
 }
 
-const authGuard = asyncHandler(async (req: Request, _res, next) => {
-  let token = req.cookies["token_uid"] || req.body.token;
-  if (!token) return next(new Unauthorized("Unauthorized user access"));
+export const authGuard = asyncHandler(
+  async (req: Request, res: Response, next) => {
+    let token = req.cookies["token_uid"] || req.body.token;
+    if (!token) return next(new Unauthorized("Unauthorized user access"));
 
-  let decodedToken;
+    let decodedToken;
 
-  try {
-    decodedToken = jwt.verify(
-      token,
-      process.env.JWT_KEY as string
-    ) as JwtPayload;
-  } catch (err) {
-    next(new BadRequest("invalid token"));
-    return;
+    try {
+      decodedToken = jwt.verify(
+        token,
+        process.env.JWT_KEY as string
+      ) as JwtPayload;
+    } catch (err) {
+      next(new BadRequest("invalid token"));
+      return;
+    }
+
+    const user = (await USER.findById(decodedToken.id)) as UserI & HasRole;
+    if (user === null) {
+      return next(new Unauthorized("Unauthorized user access"));
+    }
+    (req as AuthenticatedRequest).user = user;
+    next();
   }
+);
 
-  const user = (await USER.findById(decodedToken.id)) as UserI & HasRole;
-  if (user === null) {
-    return next(new Unauthorized("Unauthorized user access"));
-  }
-  (req as AuthenticatedRequest).user = user;
-  next();
-});
-
-const authorize =
+export const authorize =
   (...roles: Roles[]) =>
-  (
-    req: AuthenticatedRequest,
-    _res: never,
-    next: (err?: ErrorResponse) => void
-  ) => {
-    if (roles.includes(req.user.role)) return next();
+  (req: Request, _res: Response, next: (err?: ErrorResponse) => void) => {
+    if (roles.includes((req as AuthenticatedRequest).user.role)) return next();
     next(new ErrorResponse(401, "Unauthorized access"));
   };
-
-export default { authGuard, authorize };

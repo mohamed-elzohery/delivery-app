@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Model, Document, MongooseError } from "mongoose";
+import { Model, Document, MongooseError, FilterQuery } from "mongoose";
 
 export interface Pagination {
   next?: number;
@@ -18,7 +18,7 @@ export interface AdvancedResponse extends Response {
 
 const adjustResults =
   (model: Model<any>) =>
-  async (req: Request, res: AdvancedResponse, next: NextFunction) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     const queryStr = JSON.stringify(req.query).replace(
       /\b(lt|lte|gte|gt|in)\b/g,
       (match) => `$${match}`
@@ -40,7 +40,7 @@ const adjustResults =
     });
 
     //Save find query to a variable
-    let findQuery = model.find(query);
+    let findQuery = model.find({ ...query });
 
     //Set function for select field
     if (req.query.select && typeof req.query.select === "string") {
@@ -56,7 +56,7 @@ const adjustResults =
 
     //Pagination
     const page = parseInt(req.query.page as string, 10) || 1;
-    const limit = parseInt(req.query.limit as string, 10) || 2;
+    const limit = parseInt(req.query.limit as string, 10) || 10;
     const skip = (page - 1) * limit;
 
     //Calculate total number of pages
@@ -80,7 +80,11 @@ const adjustResults =
     const allResorces = await findQuery;
 
     //Store in response object
-    res.results = { count: allResorces.length, allResorces, pagination };
+    (res as AdvancedResponse).results = {
+      count: allResorces.length,
+      allResorces,
+      pagination,
+    };
 
     next();
   };
