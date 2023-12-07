@@ -21,7 +21,7 @@ const loginUser = async (formData: authData): Promise<any> => {
     );
 
     if (!response.ok) {
-      throw new Error("Login failed");
+      throw "Invalid email or password";
     }
 
     const data = await response.json();

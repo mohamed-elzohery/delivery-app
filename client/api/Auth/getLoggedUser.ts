@@ -16,6 +16,7 @@ const getLoggedUser = async () => {
 
     const data = await response.json();
     // Process the data retrieved from the response
+    console.log(data.data);
     return data.data;
   } catch (error) {
     // Handle errors
