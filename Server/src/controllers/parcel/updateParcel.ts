@@ -8,7 +8,8 @@ import BadRequest from "../../utils/errors/BadRequest";
 //@route        PUT /api/v1/parcel/bikers/:id
 //@access       Private (bikers)
 const updateParcel = asyncHandler(async (req, res, next) => {
-  const { status, pickupTimestamp, deliveryTimestamp } = req.body;
+  const { status, pickupTimestamp, dropoffTimestamp } = req.body;
+  console.log(req.body, "body were");
   const id = req.params.id;
   const bikerId = (req as AuthenticatedRequest).user
     ._id as unknown as Types.ObjectId;
@@ -27,8 +28,10 @@ const updateParcel = asyncHandler(async (req, res, next) => {
 
   parcel.status = status;
   parcel.pickupTimestamp = pickupTimestamp;
-  parcel.deliveryTimestamp = deliveryTimestamp;
-  parcel.assignedBiker = bikerId; // Assign bikerId directly
+  parcel.dropoffTimestamp = dropoffTimestamp;
+  parcel.assignedBiker = bikerId;
+
+  console.log(parcel);
 
   await parcel.save();
 

@@ -1,4 +1,3 @@
-import { AdvancedResponse } from "../../middlewares/adjustResults";
 import asyncHandler from "../../middlewares/asyncHandler";
 import { AuthenticatedRequest } from "../../middlewares/authGuard";
 import Parcel from "../../models/Parcel";
@@ -11,7 +10,7 @@ const getAllParcels = asyncHandler(async (req, res, next) => {
   const parcels = await Parcel.find({
     $or: [
       { assignedBiker: null },
-      { assignedBiker: { $ne: (req as AuthenticatedRequest).user._id } },
+      { assignedBiker: (req as AuthenticatedRequest).user._id },
     ],
   });
 

@@ -2,7 +2,7 @@
 
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { SystemRoles } from "./app/utils/isAuthorized";
+import { SystemRoles } from "./utils/isAuthorized";
 import getLoggedUser from "./api/Auth/getLoggedUser";
 
 export default async function middleware(req: NextRequest) {

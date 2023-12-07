@@ -1,8 +1,11 @@
+"use client";
+import { ParcelStatus } from "@/api/Parcel/updateParcel";
 import useParcels from "@/hooks/bikers/useParcels";
 import React from "react";
+import TodoItem from "./TodoItem";
 
 const TodoList = () => {
-  const { parcels, parcelsLoading } = useParcels();
+  const { parcels, parcelsLoading, fetchParcels } = useParcels();
   const parcelCount = parcels.length;
 
   if (parcelsLoading) return <h1>Imagine a spinner</h1>;
@@ -22,25 +25,24 @@ const TodoList = () => {
               <th className="px-4 py-2 text-left text-gray-600">
                 Pickup Address
               </th>
+              <th className="px-4 py-2 text-left text-gray-600">Pickup Time</th>
               <th className="px-4 py-2 text-left text-gray-600">
                 Dropoff Address
               </th>
+              <th className="px-4 py-2 text-left text-gray-600">
+                Dropoff Time
+              </th>
               <th className="px-4 py-2 text-left text-gray-600">Status</th>
+              <th className="px-4 py-2 text-left text-gray-600">actions</th>
             </tr>
           </thead>
           <tbody>
-            {parcels.map((item, index) => (
-              <tr
+            {parcels.map((item) => (
+              <TodoItem
+                item={item}
                 key={item._id}
-                className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}
-              >
-                <td className="border px-4 py-2">{item.name}</td>
-                <td className="border px-4 py-2">{item.pickupAddress}</td>
-                <td className="border px-4 py-2">{item.dropoffAddress}</td>
-                <td className="border px-4 py-2 capitalize">
-                  <span>{item.status}</span>
-                </td>
-              </tr>
+                fetchParcels={fetchParcels}
+              />
             ))}
           </tbody>
         </table>

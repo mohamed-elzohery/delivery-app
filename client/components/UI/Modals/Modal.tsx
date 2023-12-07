@@ -1,9 +1,6 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import Backdrop from "../Backdrop/Backdrop";
-import classes from "./Modal.module.css";
-
-const overlay = document.getElementById("overlay")!;
 
 export type ModalContentProps = {
   children?: JSX.Element | JSX.Element[];
@@ -26,7 +23,9 @@ const Modal: React.FC<ModalProps> = ({ closeModal, children }) => {
   return (
     <>
       <Backdrop onClickHandler={closeModal} />
-      {createPortal(<ModalContent>{children}</ModalContent>, overlay)}
+      <ModalContent>{children}</ModalContent>
     </>
   );
 };
+
+export default Modal;

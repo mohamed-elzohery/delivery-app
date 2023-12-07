@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import isAuthorized, { SystemRoles } from "../utils/isAuthorized";
+import isAuthorized, { SystemRoles } from "../../utils/isAuthorized";
 import React from "react";
 
 export const StatusColorEnum: { [key in string]: string } = {

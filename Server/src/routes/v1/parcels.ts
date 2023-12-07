@@ -3,7 +3,6 @@ import { authGuard, authorize } from "../../middlewares/authGuard";
 import { Roles } from "../../config/constants";
 import addParcel from "../../controllers/parcel/addParcel";
 import getSenderParcels from "../../controllers/parcel/getSenderParcels";
-import adjustResults from "../../middlewares/adjustResults";
 import Parcel from "../../models/Parcel";
 import updateParcel from "../../controllers/parcel/updateParcel";
 import getAllParcels from "../../controllers/parcel/getAllParcels";

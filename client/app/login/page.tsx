@@ -1,7 +1,7 @@
 import React from "react";
 import { redirect, useRouter } from "next/navigation";
 import LoginForm from "@/components/LoginForm/Form";
-import isAuthorized from "../utils/isAuthorized";
+import isAuthorized from "../../utils/isAuthorized";
 
 export enum Roles {
   BIKER = "bikers",

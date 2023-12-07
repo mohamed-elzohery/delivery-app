@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 export interface BikerParcel {
   _id: string;
   name: string;
+  pickupTimestamp: string;
+  dropoffTimestamp: string;
   pickupAddress: string;
   dropoffAddress: string;
   status: ParcelStatus;
@@ -31,7 +33,7 @@ const useParcels = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { parcels, parcelsLoading: isLoading };
+  return { parcels, parcelsLoading: isLoading, fetchParcels };
 };
 
 export default useParcels;

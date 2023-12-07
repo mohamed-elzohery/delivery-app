@@ -12,15 +12,15 @@ export interface ParcelI extends Document {
   pickupAddress: string;
   dropoffAddress: string;
   status: ParcelStatus;
-  pickupTimestamp?: Date;
-  deliveryTimestamp?: Date;
+  pickupTimestamp: Date;
+  dropoffTimestamp: Date;
   assignedBiker?: Types.ObjectId;
 }
 
 const ParcelSchema = new Schema<ParcelI>({
   name: {
     type: String,
-    required: [true, "Parcel name is required"],
+    required: [true, "parcel name is required"],
     minlength: [5, "parcel name cannot be less than 5 characters"],
   },
   sender: {
@@ -43,9 +43,11 @@ const ParcelSchema = new Schema<ParcelI>({
   },
   pickupTimestamp: {
     type: Date,
+    required: false,
   },
-  deliveryTimestamp: {
+  dropoffTimestamp: {
     type: Date,
+    required: false,
   },
   assignedBiker: {
     type: Types.ObjectId,

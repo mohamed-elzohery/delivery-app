@@ -1,8 +1,5 @@
 import React from "react";
-import classes from "./Backdrop.module.css";
 import { ModalContentProps } from "../Modals/Modal";
-
-const BackdropRoot = document.getElementById("backdrop")!;
 
 interface BackdropProps extends ModalContentProps {
   onClickHandler: (e: React.MouseEvent<HTMLDivElement>) => void;

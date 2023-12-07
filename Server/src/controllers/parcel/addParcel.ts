@@ -7,16 +7,15 @@ import BadRequest from "../../utils/errors/BadRequest";
 //@route        POST /api/v1/parcel/senders
 //@access       Private (senders)
 const addParcel = asyncHandler(async (req, res, next) => {
-  const { pickupAddress, dropoffAddress } = req.body;
-  if (!(pickupAddress && dropoffAddress)) {
-    return next(
-      new BadRequest("Please enter pickup address and dropoff address.")
-    );
+  const { pickupAddress, dropoffAddress, name } = req.body;
+  if (!(pickupAddress && dropoffAddress && name)) {
+    return next(new BadRequest("Please enter full parcel data."));
   }
 
   const parcel = await Parcel.create({
     pickupAddress,
     dropoffAddress,
+    name,
     sender: (req as AuthenticatedRequest).user._id,
   });
   res.status(201).json({
