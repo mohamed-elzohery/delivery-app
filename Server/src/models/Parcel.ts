@@ -7,6 +7,7 @@ export enum ParcelStatus {
 }
 
 export interface ParcelI extends Document {
+  name: string;
   sender: Types.ObjectId;
   pickupAddress: string;
   dropoffAddress: string;
@@ -17,6 +18,11 @@ export interface ParcelI extends Document {
 }
 
 const ParcelSchema = new Schema<ParcelI>({
+  name: {
+    type: String,
+    required: [true, "Parcel name is required"],
+    minlength: [5, "parcel name cannot be less than 5 characters"],
+  },
   sender: {
     type: Schema.Types.ObjectId,
     ref: "Sender",

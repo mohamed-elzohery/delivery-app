@@ -15,8 +15,13 @@ dotenv.config({
   path: path.resolve(__dirname + `/config/${process.env.NODE_ENV}.env`),
 });
 
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+};
+
 app.use(cookieParser());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/api/v1/auth", AuthRouter);

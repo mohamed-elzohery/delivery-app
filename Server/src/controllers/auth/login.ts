@@ -16,13 +16,13 @@ const login = (model: any) => {
     res.cookie("token_uid", token, {
       httpOnly: true,
       expires: new Date(Date.now() + +(process.env.JWT_AGE as string)),
-      path: "/",
     });
     const { name, role, _id } = user;
     res.json({
       success: true,
       data: { name, email, role, _id },
       token,
+      maxAge: +(process.env.JWT_AGE as string),
       message: "User is logged in successfully.",
     });
   });
