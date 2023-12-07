@@ -1,5 +1,6 @@
 import { getAllParcels } from "@/api/Parcel/getAllParcels";
 import { ParcelStatus } from "@/api/Parcel/updateParcel";
+import { Roles } from "@/app/login/page";
 import { useEffect, useState } from "react";
 
 export interface BikerParcel {
@@ -12,14 +13,14 @@ export interface BikerParcel {
   status: ParcelStatus;
 }
 
-const useParcels = () => {
+const useParcels = (role: Roles) => {
   const [parcels, setParcels] = useState<BikerParcel[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchParcels = async () => {
     try {
       setIsLoading(true);
-      const parcels = await getAllParcels();
+      const parcels = await getAllParcels(role);
       setParcels(parcels);
     } catch (error) {
       console.log(error);

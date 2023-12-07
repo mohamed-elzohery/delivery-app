@@ -1,11 +1,21 @@
 "use client";
-import { ParcelStatus } from "@/api/Parcel/updateParcel";
-import useParcels from "@/hooks/bikers/useParcels";
+import { BikerParcel } from "@/hooks/bikers/useParcels";
 import React from "react";
 import TodoItem from "./TodoItem";
 
-const TodoList = () => {
-  const { parcels, parcelsLoading, fetchParcels } = useParcels();
+export interface TodoListProps {
+  parcels: BikerParcel[];
+  parcelsLoading: boolean;
+  fetchParcels: () => Promise<void>;
+  hasActions: boolean;
+}
+
+const TodoList: React.FC<TodoListProps> = ({
+  parcels,
+  parcelsLoading,
+  fetchParcels,
+  hasActions,
+}) => {
   const parcelCount = parcels.length;
 
   if (parcelsLoading) return <h1>Imagine a spinner</h1>;
@@ -33,7 +43,9 @@ const TodoList = () => {
                 Dropoff Time
               </th>
               <th className="px-4 py-2 text-left text-gray-600">Status</th>
-              <th className="px-4 py-2 text-left text-gray-600">actions</th>
+              {hasActions && (
+                <th className="px-4 py-2 text-left text-gray-600">Actions</th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -42,6 +54,7 @@ const TodoList = () => {
                 item={item}
                 key={item._id}
                 fetchParcels={fetchParcels}
+                hasActions={hasActions}
               />
             ))}
           </tbody>

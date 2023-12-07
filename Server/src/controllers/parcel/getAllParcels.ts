@@ -13,8 +13,10 @@ const getAllParcels = asyncHandler(async (req, res, next) => {
       { assignedBiker: (req as AuthenticatedRequest).user._id },
     ],
   });
-
-  res.status(200).json(parcels);
+  res.status(200).json({
+    success: true,
+    data: parcels,
+  });
 });
 
 export default getAllParcels;

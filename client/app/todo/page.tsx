@@ -1,9 +1,19 @@
 "use client";
 import React from "react";
 import TodoList from "@/components/Lists/Todo/TodoList";
+import useParcels from "@/hooks/bikers/useParcels";
+import { Roles } from "../login/page";
 
 const Page = () => {
-  return <TodoList />;
+  const { parcels, fetchParcels, parcelsLoading } = useParcels(Roles.BIKER);
+  return (
+    <TodoList
+      hasActions={true}
+      parcels={parcels}
+      fetchParcels={fetchParcels}
+      parcelsLoading={parcelsLoading}
+    />
+  );
 };
 
 export default Page;
