@@ -1,6 +1,6 @@
 import { ParcelStatus } from "@/api/Parcel/updateParcel";
 import { StatusColorEnum } from "@/app/dashboard/page";
-import PickupParcelForm from "@/components/LoginForm/PickupParcelForm";
+import PickupParcelForm from "@/components/Forms/PickupParcelForm";
 import Modal from "@/components/UI/Modals/Modal";
 import useModal from "@/hooks/bikers/useModal";
 import { formatDateString } from "@/utils/Date/formatter";
@@ -42,12 +42,16 @@ const TodoItem: React.FC<TodoItemProps> = ({
     <tr className="bg-white">
       <td className="border px-4 py-2">{name}</td>
       <td className="border px-4 py-2">{pickupAddress}</td>
-      <td className="border px-4 py-2">{formatDateString(pickupTimestamp)}</td>
+      <td className="border px-4 py-2">
+        {!dropoffTimestamp ? "" : formatDateString(pickupTimestamp)}
+      </td>
       <td className="border px-4 py-2">{dropoffAddress}</td>
-      <td className="border px-4 py-2">{formatDateString(dropoffTimestamp)}</td>
+      <td className="border px-4 py-2">
+        {!dropoffTimestamp ? "" : formatDateString(dropoffTimestamp)}
+      </td>
       <td className="border px-6 py-4">
         <span
-          className={`p-2 ${StatusColorEnum[status]}  rounded-md text-white text-md font-bold shadow-sm capitalize`}
+          className={`box-decoration-clone p-2 ${StatusColorEnum[status]}  rounded-md text-white text-md font-bold shadow-sm capitalize`}
         >
           {status}
         </span>
@@ -58,7 +62,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
             <button
               type="button"
               onClick={handlePickupClick}
-              className="flex focus:outline-none text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+              className="flex mx-auto focus:outline-none text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
             >
               pickup
             </button>

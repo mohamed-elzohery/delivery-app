@@ -25,8 +25,8 @@ const LoginForm = () => {
       setIsLoading(true);
       const { email, password, role } = formData;
       const response: any = await loginUser({ email, password, role });
-      setCookie("token_uid", response.data.token, {
-        maxAge: response.data.maxAge,
+      setCookie("token_uid", response.token, {
+        maxAge: response.maxAge,
       });
       router.push("/main");
     } catch (err) {

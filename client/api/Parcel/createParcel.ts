@@ -1,8 +1,13 @@
 import { BikerParcel } from "@/hooks/bikers/useParcels";
 
-export const updateParcel = async (parcel: BikerParcel) => {
-  console.log(updateParcel);
-  const res = await fetch(`${process.env.SERVER_URL}/parcels/bikers}`, {
+export interface SenderParcel {
+  pickupAddress: string;
+  dropoffAddress: string;
+  name: string;
+}
+
+const createParcel = async (parcel: SenderParcel) => {
+  const res = await fetch(`${process.env.SERVER_URL}/parcels/senders`, {
     cache: "no-store",
     method: "POST",
     credentials: "include",
@@ -16,3 +21,5 @@ export const updateParcel = async (parcel: BikerParcel) => {
     throw new Error("Parcel might be picked up by another biker.");
   if (res.status === 400) throw new Error("something's missing");
 };
+
+export default createParcel;
