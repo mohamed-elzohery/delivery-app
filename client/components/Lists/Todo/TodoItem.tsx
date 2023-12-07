@@ -1,5 +1,5 @@
 import { ParcelStatus } from "@/api/Parcel/updateParcel";
-import { StatusColorEnum } from "@/app/dashboard/page";
+import { StatusColorEnum } from "@/app/(AuthPages)/dashboard/page";
 import PickupParcelForm from "@/components/Forms/PickupParcelForm";
 import Modal from "@/components/UI/Modals/Modal";
 import useModal from "@/hooks/bikers/useModal";
