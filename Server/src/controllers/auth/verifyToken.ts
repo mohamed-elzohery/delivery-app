@@ -7,7 +7,7 @@ import User from "../../models/common/User";
 const verifyToken = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const token = req.cookies["token_uid"] || req.body.token;
-    console.log(req.cookies);
+    console.log(req.cookies["token_uid"]);
     if (!token) {
       res.send({
         success: true,

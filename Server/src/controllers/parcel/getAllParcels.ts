@@ -8,7 +8,14 @@ import BadRequest from "../../utils/errors/BadRequest";
 //@route        GET /api/v1/parcel/bikers
 //@access       Private (bikers)
 const getAllParcels = asyncHandler(async (req, res, next) => {
-  res.status(200).json((res as AdvancedResponse).results);
+  const parcels = await Parcel.find({
+    $or: [
+      { assignedBiker: null },
+      { assignedBiker: { $ne: (req as AuthenticatedRequest).user._id } },
+    ],
+  });
+
+  res.status(200).json(parcels);
 });
 
 export default getAllParcels;

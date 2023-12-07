@@ -77,7 +77,7 @@ const adjustResults =
     findQuery.skip(skip).limit(limit);
 
     //Execute Query
-    const allResorces = await findQuery;
+    const allResorces: any = await findQuery;
 
     //Store in response object
     (res as AdvancedResponse).results = {

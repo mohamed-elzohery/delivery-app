@@ -1,4 +1,4 @@
-import getLoggedUser from "@/api/getLoggedUser";
+import getLoggedUser from "@/api/Auth/getLoggedUser";
 
 export enum SystemRoles {
   BIKER = "Biker",

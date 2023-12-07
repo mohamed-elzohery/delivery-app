@@ -2,13 +2,13 @@ import { redirect } from "next/navigation";
 import isAuthorized, { SystemRoles } from "../utils/isAuthorized";
 import React from "react";
 
-const StatusColorEnum: { [key in string]: string } = {
+export const StatusColorEnum: { [key in string]: string } = {
   pending: "bg-blue-600",
   "picked up": "bg-yellow-600",
   delivered: "bg-green-600",
 };
 
-const parcels = [
+export const parcels = [
   {
     id: "ass",
     name: "hello world parcel",
@@ -46,9 +46,9 @@ const parcels = [
   },
 ];
 const Page = async () => {
-  const isAllowable = await isAuthorized(SystemRoles.SENDER);
-  console.log(isAllowable, "isAllowd");
-  if (!isAllowable) redirect("/login");
+  // const isAllowable = await isAuthorized(SystemRoles.SENDER);
+  // console.log(isAllowable, "isAllowd");
+  // if (!isAllowable) redirect("/login");
 
   return (
     <div className="flex  justify-center h-screen">

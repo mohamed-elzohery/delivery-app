@@ -18,7 +18,7 @@ ParcelsRouter.route("/senders")
 ParcelsRouter.route("/bikers")
   .all(authGuard, authorize(Roles.BIKER))
   .put(updateParcel)
-  .get(adjustResults(Parcel), getAllParcels);
+  .get(getAllParcels);
 
 ParcelsRouter.route("/bikers/:id").put(
   authGuard,
