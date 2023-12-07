@@ -11,9 +11,7 @@ import ParcelsRouter from "./routes/v1/parcels";
 const app = express();
 process.env.NODE_ENV !== "production" && app.use(morgan("dev"));
 
-dotenv.config({
-  path: path.resolve(__dirname + `/config/${process.env.NODE_ENV}.env`),
-});
+dotenv.config();
 
 const corsOptions = {
   origin: "http://localhost:3000",

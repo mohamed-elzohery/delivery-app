@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "npx tsc",
-    "start": "NODE_ENV=prod node dist/server.js",
+    "start": "NODE_ENV=prod && npm run reset && npm run build && node dist/server.js",
     "dev": "npm run reset && nodemon src/server.ts",
     "seed": "ts-node src/seeder/seeder.ts i",
     "reset": "ts-node src/seeder/seeder.ts d && ts-node src/seeder/seeder.ts i",
