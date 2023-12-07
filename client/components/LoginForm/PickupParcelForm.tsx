@@ -1,4 +1,5 @@
 import { ParcelStatus, updateParcel } from "@/api/Parcel/updateParcel";
+import useFormData from "@/hooks/bikers/useFormData";
 import React, { useState } from "react";
 
 export interface PickupParcelForm {
@@ -12,11 +13,10 @@ const PickupParcelForm: React.FC<PickupParcelForm> = ({
   id,
   fetchParcels,
 }) => {
-  const [formData, setFormData] = useState({
+  const { errors, formData, handleInputChange, setErrors } = useFormData({
     pickupTimestamp: "",
     dropoffTimestamp: "",
   });
-  const [errors, setErrors] = useState<string[]>([]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     try {
@@ -36,20 +36,10 @@ const PickupParcelForm: React.FC<PickupParcelForm> = ({
     }
   };
 
-  const handleInputChange = (
-    e: React.FormEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
-    const { name, value } = e.currentTarget;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
   const handleCancel = () => {
     closeModal();
   };
+
   return (
     <form className="w-[500px] p-8 space-y-4" onSubmit={handleSubmit}>
       <div className="inset-y-0 flex items-center ps-3.5 pointer-events-none w-md">

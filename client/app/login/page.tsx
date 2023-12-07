@@ -1,7 +1,5 @@
 import React from "react";
-import { redirect, useRouter } from "next/navigation";
-import LoginForm from "@/components/LoginForm/Form";
-import isAuthorized from "../../utils/isAuthorized";
+import LoginForm from "@/components/LoginForm/LoginForm";
 
 export enum Roles {
   BIKER = "bikers",
@@ -9,8 +7,6 @@ export enum Roles {
 }
 
 const Login = async () => {
-  // const isLogged = await isAuthorized();
-  // if (isLogged) redirect("/main");
   return <LoginForm />;
 };
 

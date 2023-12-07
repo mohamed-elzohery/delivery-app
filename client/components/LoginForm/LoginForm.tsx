@@ -1,49 +1,36 @@
 "use client";
 import { Roles } from "@/app/login/page";
-import axios, { AxiosError } from "axios";
+
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import LoaderButton from "../buttons/LoaderButton";
+import useFormData from "@/hooks/bikers/useFormData";
+import loginUser from "@/api/Auth/loginUser";
 
 const LoginForm = () => {
   const router = useRouter();
-  const [formData, setFormData] = useState({
+  const { errors, formData, handleInputChange, setErrors } = useFormData({
     email: "",
     password: "",
     role: Roles.Sender,
   });
-  const [errors, setErrors] = useState<string[]>([]);
+
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleInputChange = (
-    e: React.FormEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
-    const { name, value } = e.currentTarget;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-  console.log(process.env.SERVER_URL);
   const handleSubmit = async (e: React.FormEvent) => {
     setErrors([]);
     e.preventDefault();
     try {
       setIsLoading(true);
-      const response: any = await axios.post(
-        `${process.env.SERVER_URL}/auth/${formData.role}/login`,
-        { email: formData.email, password: formData.password }
-      );
-      console.log("logn", response);
+      const { email, password, role } = formData;
+      const response: any = await loginUser({ email, password, role });
       setCookie("token_uid", response.data.token, {
         maxAge: response.data.maxAge,
       });
       router.push("/main");
     } catch (err) {
-      setErrors([(err as AxiosError).response?.data as string]);
+      setErrors([err as string]);
     } finally {
       setIsLoading(false);
     }
